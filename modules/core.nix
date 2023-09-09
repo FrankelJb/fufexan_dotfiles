@@ -33,7 +33,7 @@
     libvirtd.enable = true;
   };
   
-  virtualization = {
+  virtualisation = {
     libvirtd.enable = true;
   };
 
