@@ -4,14 +4,14 @@
   lib,
   ...
 }: {
-  xdg.configfile."fish/functions" = {
+  xdg.configFile."fish/functions" = {
     source = lib.cleanSourceWith {
       src = lib.cleanSource ./functions/.;
     };
     recursive = true;
   };
 
-  xdg.configfile."fish/themes" = {
+  xdg.configFile."fish/themes" = {
     source = lib.cleanSourceWith {
       src = lib.cleanSource ./themes/.;
     };

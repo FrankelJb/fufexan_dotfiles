@@ -18,7 +18,7 @@ in {
         # NixOS modules
         sharedModules = [
           {home-manager.useGlobalPkgs = true;}
-          {disabledModules = ["security/pam.nix"];}
+          # {disabledModules = ["security/pam.nix"];}
           inputs.agenix.nixosModules.default
           inputs.hm.nixosModule
           inputs.hyprland.nixosModules.default
@@ -28,7 +28,7 @@ in {
           ./core.nix
           # ./network.nix
           ./nix.nix
-          ./pam.nix
+          # ./pam.nix
           ./security.nix
         ];
       };

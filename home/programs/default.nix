@@ -7,7 +7,6 @@
     ./media.nix
     ./git.nix
     ./gtk.nix
-    ./kdeconnect.nix
     ./packages.nix
     ./qt.nix
     ./xdg.nix
