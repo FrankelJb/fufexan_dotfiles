@@ -10,7 +10,7 @@
     helium = nixosSystem {
       modules =
         [
-          ./io
+          ./helium
           ../modules/bluetooth.nix
           # ../modules/greetd.nix
           ../modules/desktop.nix

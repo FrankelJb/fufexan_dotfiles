@@ -30,7 +30,7 @@
     extraGroups = ["libvirtd" "networkmanager" "wheel"];
   };
   
-  virtualization = {
+  virtualisation = {
     libvirtd.enable = true;
   };
 

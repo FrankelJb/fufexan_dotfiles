@@ -5,15 +5,15 @@
   ...
 }: {
   xdg.configfile."fish/functions" = {
-    source = lib.cleansourcewith {
-      src = lib.cleansource ./functions/.;
+    source = lib.cleanSourceWith {
+      src = lib.cleanSource ./functions/.;
     };
     recursive = true;
   };
 
   xdg.configfile."fish/themes" = {
-    source = lib.cleansourcewith {
-      src = lib.cleansource ./themes/.;
+    source = lib.cleanSourceWith {
+      src = lib.cleanSource ./themes/.;
     };
     recursive = true;
   };
@@ -38,52 +38,6 @@
       sshk = "kitty +kitten ssh";
       vim = "nvim";
     };
-
-    loginShellInit =
-      let
-        # This naive quoting is good enough in this case. There shouldn't be any
-        # double quotes in the input string, and it needs to be double quoted in case
-        # it contains a space (which is unlikely!)
-        dquote = str: "\"" + str + "\"";
-
-        makeBinPathList = map (path: path + "/bin");
-      in
-      lib.optionalString pkgs.stdenv.isDarwin ''
-        export NIX_PATH="darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels:$NIX_PATH"
-        fish_add_path --move --prepend --path ${lib.concatMapStringsSep " " dquote (makeBinPathList osConfig.environment.profiles)}
-        set fish_user_paths $fish_user_paths
-      '';
-
-    interactiveShellInit = lib.optionalString pkgs.stdenv.isDarwin ''
-      # 1password plugin
-      if [ -f ~/.config/op/plugins.sh ];
-          source ~/.config/op/plugins.sh
-      end
-
-      # Brew environment
-      if [ -f /opt/homebrew/bin/brew ];
-        eval "$("/opt/homebrew/bin/brew" shellenv)"
-      end
-
-      # Nix
-      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish' ];
-       source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-      end
-      if [ -f '/nix/var/nix/profiles/default/etc/profile.d/nix.fish' ];
-       source '/nix/var/nix/profiles/default/etc/profile.d/nix.fish'
-      end
-      # End Nix
-
-      # Disable greeting
-      set fish_greeting
-
-      # Fetch on terminal open
-      if [ "$TMUX" = "" ];
-          command -v tmux && tmux
-      end
-
-      fastfetch
-    '';
 
     plugins = [
       # Enable a plugin (here grc for colorized command output) from nixpkgs
