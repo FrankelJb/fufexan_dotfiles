@@ -1,13 +1,12 @@
-{
-  config,
-  pkgs,
-  self,
-  lib,
-  ...
+{ config
+, pkgs
+, self
+, lib
+, ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [ ./hardware-configuration.nix ];
 
- # Use the systemd-boot EFI boot loader.
+  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 

@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }: {
   xdg.configFile."fish/functions" = {
     source = lib.cleanSourceWith {
@@ -18,7 +17,7 @@
     recursive = true;
   };
 
-  programs.fish = { 
+  programs.fish = {
     enable = true;
     shellAliases = {
       pbcopy = "xsel --clipboard --input";

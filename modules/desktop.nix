@@ -1,13 +1,12 @@
-{
-  pkgs,
-  lib,
-  self,
-  inputs,
-  ...
+{ pkgs
+, lib
+, self
+, inputs
+, ...
 }: {
   boot.plymouth = {
     enable = true;
-    themePackages = [self.packages.${pkgs.system}.catppuccin-plymouth];
+    themePackages = [ self.packages.${pkgs.system}.catppuccin-plymouth ];
     theme = "catppuccin-mocha";
   };
 
@@ -24,7 +23,7 @@
       roboto
 
       # nerdfonts
-      (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
+      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
     ];
 
     # causes more issues than it solves
@@ -34,10 +33,10 @@
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = {
-      serif = ["Roboto Serif" "Noto Color Emoji"];
-      sansSerif = ["Roboto" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
+      serif = [ "Roboto Serif" "Noto Color Emoji" ];
+      sansSerif = [ "Roboto" "Noto Color Emoji" ];
+      monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 
@@ -70,7 +69,7 @@
     opengl = {
       enable = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [nvidia-vaapi-driver];
+      extraPackages = with pkgs; [ nvidia-vaapi-driver ];
     };
 
     opentabletdriver.enable = true;
@@ -111,17 +110,6 @@
 
     gnome.gnome-keyring.enable = true;
 
-    greetd = {
-      enable = true;
-      settings = rec {
-        initial_session = {
-          command = "Hyprland";
-          user = "beans";
-        };
-        default_session = initial_session;
-      };
-    }
-
     logind.extraConfig = ''
       HandlePowerKey=suspend
     '';
@@ -146,10 +134,10 @@
     };
 
     # needed for GNOME services outside of GNOME Desktop
-    dbus.packages = [pkgs.gcr];
+    dbus.packages = [ pkgs.gcr ];
 
     udev = {
-      packages = with pkgs; [gnome.gnome-settings-daemon];
+      packages = with pkgs; [ gnome.gnome-settings-daemon ];
       extraRules = ''
         # add my android device to adbusers
         SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"

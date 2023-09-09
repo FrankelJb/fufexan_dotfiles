@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }:
 # configuration shared by all hosts
 {
@@ -27,9 +26,9 @@
   users.users.beans = {
     isNormalUser = true;
     shell = pkgs.bash;
-    extraGroups = ["libvirtd" "networkmanager" "wheel"];
+    extraGroups = [ "libvirtd" "networkmanager" "wheel" ];
   };
-  
+
   virtualisation = {
     libvirtd.enable = true;
   };
