@@ -15,9 +15,7 @@
           # ../modules/greetd.nix
           ../modules/desktop.nix
           ../modules/gamemode.nix
-          ../modules/lanzaboote.nix
-          ../modules/power-switcher.nix
-          {home-manager.users.mihai.imports = homeImports."mihai@io";}
+          {home-manager.users.beans.imports = homeImports."beans@helium";}
         ]
         ++ sharedModules;
     };

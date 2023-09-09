@@ -7,15 +7,17 @@
 }: {
   imports = [./hardware-configuration.nix];
 
-  environment.systemPackages = [config.boot.kernelPackages.cpupower];
-
   hardware.pulseaudio.enable = lib.mkForce false;
 
   networking.hostName = "helium";
 
   programs = {
     # enable hyprland and required options
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      # enabledNvidiaPatches = true; TODO enable this
+      xwayland.enable = true;
+    };
     steam.enable = true;
   };
 
@@ -24,6 +26,7 @@
       enable = true;
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
+      # videoDrivers = ["nvidia"]; TODO uncomment this 
     };
   };
 }

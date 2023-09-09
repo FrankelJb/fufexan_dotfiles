@@ -9,7 +9,7 @@
     # we need git for flakes
     pkgs.git
   ];
-  environment.variables.FLAKE = "/home/mihai/Documents/code/dotfiles";
+  environment.variables.FLAKE = "/home/beans/projects/dotfiles";
 
   nh = {
     enable = true;
@@ -18,21 +18,6 @@
   };
 
   nix = {
-    # extra builders to offload work onto
-    # don't set a machine as a builder to itself (throws warnings)
-    buildMachines = lib.filter (x: x.hostName != config.networking.hostName) [
-      {
-        system = "aarch64-linux";
-        sshUser = "mihai";
-        sshKey = "/etc/ssh/ssh_host_ed25519_key";
-        maxJobs = 4;
-        hostName = "alpha";
-        protocol = "ssh-ng";
-        supportedFeatures = ["nixos-test" "benchmark" "kvm" "big-parallel"];
-      }
-    ];
-    distributedBuilds = true;
-
     # pin the registry to avoid downloading and evaling a new nixpkgs version every time
     registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
 
