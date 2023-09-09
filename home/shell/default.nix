@@ -7,7 +7,7 @@ in {
     ./cli.nix
     ./starship.nix
     ./transient-services.nix
-    ./zsh.nix
+    ./fish
   ];
 
   # add environment variables

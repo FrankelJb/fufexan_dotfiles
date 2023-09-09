@@ -67,36 +67,6 @@
   # enable location service
   location.provider = "geoclue2";
 
-  networking = {
-    firewall = {
-      # for Rocket League
-      allowedTCPPortRanges = [
-        {
-          from = 27015;
-          to = 27030;
-        }
-        {
-          from = 27036;
-          to = 27037;
-        }
-      ];
-      allowedUDPPorts = [4380 27036 34197];
-      allowedUDPPortRanges = [
-        {
-          from = 7000;
-          to = 9000;
-        }
-        {
-          from = 27000;
-          to = 27031;
-        }
-      ];
-
-      # Spotify track sync with other devices
-      allowedTCPPorts = [57621];
-    };
-  };
-
   nix = {
     settings = {
       substituters = [
@@ -122,40 +92,10 @@
   };
 
   services = {
-    # use Ambient Light Sensors for auto brightness adjustment
-    clight = {
-      enable = true;
-      settings = {
-        verbose = true;
-        backlight.disabled = true;
-        dpms.timeouts = [900 300];
-        dimmer.timeouts = [870 270];
-        gamma.long_transition = false;
-        screen.disabled = true;
-      };
-    };
-
     # provide location
     geoclue2.enable = true;
 
     gnome.gnome-keyring.enable = true;
-
-    # keyboard remapping
-    kmonad = {
-      enable = true;
-      package = inputs.kmonad.packages.${pkgs.system}.default;
-      keyboards = {
-        one2mini = {
-          device = "/dev/input/by-id/usb-Ducky_Ducky_One2_Mini_RGB_DK-V1.17-190813-event-kbd";
-          defcfg = {
-            enable = true;
-            fallthrough = true;
-            allowCommands = false;
-          };
-          config = builtins.readFile "${self}/modules/main.kbd";
-        };
-      };
-    };
 
     logind.extraConfig = ''
       HandlePowerKey=suspend
@@ -179,9 +119,6 @@
       enable = true;
       resyncTimer = "10m";
     };
-
-    # battery info & stuff
-    upower.enable = true;
 
     # needed for GNOME services outside of GNOME Desktop
     dbus.packages = [pkgs.gcr];

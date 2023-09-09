@@ -10,13 +10,11 @@
     module_args
     inputs.anyrun.homeManagerModules.default
     inputs.nix-index-db.hmModules.nix-index
-    inputs.spicetify-nix.homeManagerModule
     inputs.hyprland.homeManagerModules.default
   ];
 
   homeImports = {
-    "mihai@io" = [./io] ++ sharedModules;
-    "mihai@rog" = [./rog] ++ sharedModules;
+    "beans@helium" = [./helium] ++ sharedModules;
     server = [./server] ++ sharedModules;
   };
 
@@ -29,13 +27,8 @@ in {
 
   flake = {
     homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
-      "mihai@io" = homeManagerConfiguration {
-        modules = homeImports."mihai@io";
-        inherit pkgs;
-      };
-
-      "mihai@rog" = homeManagerConfiguration {
-        modules = homeImports."mihai@rog";
+      "beans@helium" = homeManagerConfiguration {
+        modules = homeImports."beans@helium";
         inherit pkgs;
       };
 

@@ -42,14 +42,15 @@
 
     ignores = ["*~" "*.swp" "*result*" ".direnv" "node_modules"];
 
-    signing = {
-      key = "${config.home.homeDirectory}/.ssh/id_ed25519";
-      signByDefault = true;
-    };
+    # TODO: maybe add back the signing key
+    # signing = {
+    #   key = "${config.home.homeDirectory}/.ssh/id_ed25519";
+    #   signByDefault = true;
+    # };
 
-    extraConfig.gpg.format = "ssh";
+    # extraConfig.gpg.format = "ssh";
 
-    userEmail = "fufexan@protonmail.com";
-    userName = "Mihai Fufezan";
+    userEmail = "beans@habanerojam.xyz";
+    userName = "Jonathan Frankel";
   };
 }

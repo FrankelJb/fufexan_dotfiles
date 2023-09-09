@@ -1,3 +1,3 @@
 {
-  programs.helix.enable = true;
+  programs.nvim.enable = true;
 }

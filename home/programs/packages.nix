@@ -1,14 +1,11 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # messaging
-    tdesktop
+    signal-desktop
 
     # misc
     libnotify
     xdg-utils
 
-    # productivity
-    obsidian
-    xournalpp
   ];
 }

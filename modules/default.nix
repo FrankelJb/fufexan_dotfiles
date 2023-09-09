@@ -28,9 +28,7 @@ in {
           inputs.lanzaboote.nixosModules.lanzaboote
           module_args
           ./core.nix
-          ./howdy
-          ./linux-enable-ir-emitter.nix
-          ./network.nix
+          # ./network.nix
           ./nix.nix
           ./pam.nix
           ./security.nix
@@ -45,9 +43,8 @@ in {
     desktop = import ./desktop.nix;
     gamemode = import ./gamemode.nix;
     greetd = import ./greetd.nix;
-    lanzaboote = import ./lanzaboote.nix;
     minimal = import ./minimal.nix;
-    network = import ./network.nix;
+    # network = import ./network.nix;
     nix = import ./nix.nix;
   };
 }

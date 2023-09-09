@@ -1,6 +1,5 @@
 {
   imports = [
-    ../../editors/helix
     ../../editors/neovim
     ../../programs
     ../../programs/games.nix

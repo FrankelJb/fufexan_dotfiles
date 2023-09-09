@@ -10,7 +10,6 @@
     ./kdeconnect.nix
     ./packages.nix
     ./qt.nix
-    ./spicetify.nix
     ./xdg.nix
     ./zathura.nix
   ];
@@ -27,9 +26,8 @@
 
     firefox = {
       enable = true;
-      profiles.mihai = {};
+      profiles.beans = {};
     };
   };
 
-  services.syncthing.enable = true;
 }
