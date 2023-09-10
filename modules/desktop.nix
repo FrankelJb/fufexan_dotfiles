@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   self,
   inputs,
   ...
@@ -73,6 +74,8 @@
     };
 
     opentabletdriver.enable = true;
+
+    pulseaudio.enable = lib.mkForce false;
 
     xpadneo.enable = true;
   };
