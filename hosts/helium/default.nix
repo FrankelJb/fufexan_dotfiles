@@ -7,7 +7,7 @@
 }: {
   imports = [./hardware-configuration.nix];
 
-  # Use the systemd-boot EFI boot loader.
+ # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -19,6 +19,7 @@
     # enable hyprland and required options
     hyprland = {
       enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       # enabledNvidiaPatches = true; TODO enable this
       xwayland.enable = true;
     };

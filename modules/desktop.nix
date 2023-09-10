@@ -56,6 +56,8 @@
   #   WLR_NO_HARDWARE_CURSORS = "1";
   # };
 
+  environment.systemPackages = with pkgs; [ virt-manager ];
+
   hardware = {
     # nvidia = { TODO uncomment
     #   modesetting.enable = true;
@@ -105,6 +107,17 @@
     geoclue2.enable = true;
 
     gnome.gnome-keyring.enable = true;
+
+    greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command = "Hyprland";
+          user = "beans";
+        };
+        default_session = initial_session;
+      };
+    }
 
     logind.extraConfig = ''
       HandlePowerKey=suspend

@@ -26,6 +26,10 @@ in {
     ./swayidle.nix
   ];
 
+  environment.etc."greetd/environments".text = ''
+    Hyprland
+  '';
+
   programs.eww-hyprland = {
     enable = true;
     # temp fix until https://github.com/NixOS/nixpkgs/pull/249515 lands. after that,
