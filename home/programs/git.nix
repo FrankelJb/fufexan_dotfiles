@@ -4,7 +4,7 @@
   default,
   ...
 }: {
-  home.packages = [pkgs.gh];
+  home.packages = [pkgs.lazygit];
 
   programs.git = {
     enable = true;

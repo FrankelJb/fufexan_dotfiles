@@ -2,6 +2,7 @@
 , pkgs
 , self
 , lib
+, inputs
 , ...
 }: {
   imports = [ ./hardware-configuration.nix ];
@@ -26,6 +27,7 @@
   };
 
   services = {
+    openssh.enable = true;
     xserver = {
       enable = true;
       desktopManager.gnome.enable = true;
