@@ -32,10 +32,6 @@
   virtualisation = {
     libvirtd.enable = true;
   };
-  
-  virtualisation = {
-    libvirtd.enable = true;
-  };
 
   # compresses half the ram for use as swap
   zramSwap.enable = true;

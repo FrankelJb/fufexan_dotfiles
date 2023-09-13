@@ -51,6 +51,7 @@
   };
 
   services = {
+    openssh.enable = true;
     xserver = {
       enable = true;
       # desktopManager.gnome.enable = true;
