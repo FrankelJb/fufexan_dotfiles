@@ -2,6 +2,7 @@
 , lib
 , self
 , inputs
+, config
 , ...
 }: {
   boot.plymouth = {
@@ -41,31 +42,31 @@
   };
 
   # use Wayland where possible (electron)
-  environment.variables.NIXOS_OZONE_WL = "1"; # TODO remove this and uncomment below
+  # environment.variables.NIXOS_OZONE_WL = "1"; # TODO remove this and uncomment below
 
-  # environment.variables = {
-  #   GBM_BACKEND = "nvidia-drm";
-  #   LIBVA_DRIVER_NAME = "nvidia";
-  #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  #   __GL_GSYNC_ALLOWED = "1";
-  #   __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
-  # };
+  environment.variables = {
+    GBM_BACKEND = "nvidia-drm";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    __GL_GSYNC_ALLOWED = "1";
+    __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
+  };
 
-  # environment.sessionVariables = {
-  #   NIXOS_OZONE_WL = "1";
-  #   WLR_NO_HARDWARE_CURSORS = "1";
-  # };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
 
   environment.systemPackages = with pkgs; [ virt-manager ];
 
   hardware = {
-    # nvidia = { TODO uncomment
-    #   modesetting.enable = true;
-    #   nvidiaSettings = true;
-    #   open = true;
-    #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-    #   powerManagement.enable = true;
-    # };
+    nvidia = { # TODO uncomment
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      powerManagement.enable = true;
+    };
     opengl = {
       enable = true;
       driSupport32Bit = true;

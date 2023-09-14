@@ -11,6 +11,7 @@
     duf
     fd
     ripgrep
+    zellij
 
     # file managers
     ranger
@@ -34,6 +35,7 @@
     btop.enable = true;
     eza.enable = true;
     ssh.enable = true;
+    vim.enable = true;
 
     skim = {
       enable = true;

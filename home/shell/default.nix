@@ -7,7 +7,9 @@ in {
     ./cli.nix
     ./starship.nix
     ./transient-services.nix
+    ./bash
     ./fish
+    ./zellij
   ];
 
   # add environment variables
@@ -21,7 +23,7 @@ in {
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
 
-    EDITOR = "hx";
+    EDITOR = "vim";
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     MANROFFOPT = "-c";
     DIRENV_LOG_FORMAT = "";

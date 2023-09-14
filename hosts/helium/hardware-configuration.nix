@@ -5,36 +5,36 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
+  boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/5df3c54f-7eac-437b-b7c8-300a7751a16a";
+    { device = "/dev/disk/by-uuid/74194a1e-7e23-41e9-9985-d4d94ca199a8";
       fsType = "btrfs";
       options = [ "subvol=root" "compress=zstd" ];
     };
 
-  boot.initrd.luks.devices."system".device = "/dev/disk/by-uuid/f2290ee2-fa31-4441-8ecf-5dadb0e030a3";
+  boot.initrd.luks.devices."system".device = "/dev/disk/by-uuid/fb0b6038-91e3-4573-b91b-0fb584585145";
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/5df3c54f-7eac-437b-b7c8-300a7751a16a";
+    { device = "/dev/disk/by-uuid/74194a1e-7e23-41e9-9985-d4d94ca199a8";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/5df3c54f-7eac-437b-b7c8-300a7751a16a";
+    { device = "/dev/disk/by-uuid/74194a1e-7e23-41e9-9985-d4d94ca199a8";
       fsType = "btrfs";
       options = [ "subvol=nix" "noatime" "compress=zstd" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/BF0D-9753";
+    { device = "/dev/disk/by-uuid/C9CC-13C7";
       fsType = "vfat";
     };
 
@@ -45,7 +45,10 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

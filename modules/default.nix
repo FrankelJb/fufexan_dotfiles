@@ -40,7 +40,7 @@ in {
     bluetooth = import ./bluetooth.nix;
     desktop = import ./desktop.nix;
     gamemode = import ./gamemode.nix;
-    greetd = import ./greetd.nix;
+    # greetd = import ./greetd.nix;
     minimal = import ./minimal.nix;
     # network = import ./network.nix;
     nix = import ./nix.nix;

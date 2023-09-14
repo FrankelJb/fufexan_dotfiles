@@ -9,6 +9,7 @@
   scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";
 in {
   wayland.windowManager.hyprland.extraConfig = ''
+    monitor=DP-3,2560x1440@244,0x0,1
     $mod = SUPER
 
     env = _JAVA_AWT_WM_NONREPARENTING,1
@@ -50,25 +51,13 @@ in {
     }
 
     input {
-      kb_layout = ro
+      kb_layout = us
+      sensitivity = 0
+      force_no_accel = 1
 
       # focus change on cursor move
       follow_mouse = 1
       accel_profile = flat
-      touchpad {
-        scroll_factor = 0.3
-      }
-    }
-
-    device:MSFT0001:00 04F3:31EB Touchpad {
-      accel_profile = adaptive
-      natural_scroll = true
-      sensitivity = 0.1
-    }
-    device:elan1200:00-04f3:3090-touchpad {
-      accel_profile = adaptive
-      natural_scroll = true
-      sensitivity = 0.1
     }
 
     general {
@@ -174,21 +163,21 @@ in {
 
     # utility
     # launcher
-    bindr = $mod, SUPER_L, exec, pkill .${default.launcher}-wrapped || run-as-service ${default.launcher}
+    bindr = $mod, SPACE, exec, pkill .${default.launcher}-wrapped || run-as-service ${default.launcher}
     # terminal
     bind = $mod, Return, exec, run-as-service ${default.terminal.name}
     # logout menu
     bind = $mod, Escape, exec, wlogout -p layer-shell
     # lock screen
-    bind = $mod, L, exec, loginctl lock-session
+    bind = $mod CTRL, Q, exec, loginctl lock-session
     # select area to perform OCR on
     bind = $mod, O, exec, run-as-service wl-ocr
 
     # move focus
-    bind = $mod, left, movefocus, l
-    bind = $mod, right, movefocus, r
-    bind = $mod, up, movefocus, u
-    bind = $mod, down, movefocus, d
+    bind = $mod, H, movefocus, l
+    bind = $mod, J, movefocus, d
+    bind = $mod, K, movefocus, u
+    bind = $mod, L, movefocus, r
 
     # window resize
     bind = $mod, S, submap, resize

@@ -25,7 +25,6 @@
 
   users.users.beans = {
     isNormalUser = true;
-    shell = pkgs.bash;
     extraGroups = [ "libvirtd" "networkmanager" "wheel" ];
     hashedPassword = "$6$7T6zSJLl5wYQWz0W$hDTWqSOrE484WnOea/Ucj9iz7HRU9IqwdM1RMPfPb2J7eim9rd4gI3JSlwE1OG.eabFeHsMrjJictMexMzweB1";
   };

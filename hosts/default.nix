@@ -13,7 +13,7 @@
           [
             ./helium
             ../modules/bluetooth.nix
-            ../modules/greetd.nix
+            # ../modules/greetd.nix
             ../modules/desktop.nix
             ../modules/gamemode.nix
             { home-manager.users.beans.imports = homeImports."beans@helium"; }

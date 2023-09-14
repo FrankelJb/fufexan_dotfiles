@@ -20,7 +20,7 @@
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      # enabledNvidiaPatches = true; TODO enable this
+      enableNvidiaPatches = true; #TODO enable this
       xwayland.enable = true;
     };
     steam.enable = true;
@@ -32,7 +32,7 @@
       enable = true;
       desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
-      # videoDrivers = ["nvidia"]; TODO uncomment this 
+      videoDrivers = ["nvidia"]; #TODO uncomment this 
     };
   };
 }
