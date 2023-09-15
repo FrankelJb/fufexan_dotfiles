@@ -66,22 +66,6 @@
     (box ; battery info & power button
       :space-evenly false
       (box
-        :class "battery"
-        :space-evenly false
-        (label
-          :class "icon ${EWW_BATTERY.total_avg > 20 ? '' : 'low'}"
-          :text {battery_icons[round(EWW_BATTERY.total_avg / (100 / arraylength(battery_icons)) - 1,0)]})
-        (label
-          :class "text"
-          :text {round(EWW_BATTERY.total_avg,0)})
-        (label
-          :class "status text"
-          :text {battery.status})
-        (label
-          :class "rate text"
-          :text {battery.rate}))
-
-      (box
         :hexpand true)
       (button
         :class "button"

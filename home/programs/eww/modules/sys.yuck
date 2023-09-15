@@ -15,12 +15,3 @@
 
 (defvar GB 1024000000)
 (defvar MB 1024000)
-
-(defwidget battery-module []
-  (box
-    :class "module battery"
-    (label
-      :value {EWW_BATTERY.total_avg}
-      :class "icon ${EWW_BATTERY.total_avg > 20 ? '' : 'low'}"
-      :tooltip "battery on ${round(EWW_BATTERY.total_avg,0)}%"
-      :text {battery_icons[round(EWW_BATTERY.total_avg / (100 / arraylength(battery_icons)) - 1,0)]})))

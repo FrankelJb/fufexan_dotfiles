@@ -10,6 +10,6 @@
   ];
 
   home.sessionVariables = {
-    GDK_SCALE = "2";
+    GDK_SCALE = "1";
   };
 }

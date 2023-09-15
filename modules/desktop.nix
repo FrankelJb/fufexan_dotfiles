@@ -45,11 +45,24 @@
   # environment.variables.NIXOS_OZONE_WL = "1"; # TODO remove this and uncomment below
 
   environment.variables = {
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    __GL_GSYNC_ALLOWED = "0";
+    __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
     GBM_BACKEND = "nvidia-drm";
     LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    __GL_GSYNC_ALLOWED = "1";
-    __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
+    MOZ_ENABLE_WAYLAND = "1";
+    NIXOS_OZONE_WL = "1";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    QT_QPA_PLATFORM = "wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    QT_QPA_PLATFORMTHEME = "qt5ct";
+    QT_STYLE_OVERRIDE = "kvantum";
+    WLR_BACKEND = "vulkan";
+    WLR_RENDERER = "vulkan";
+    XDG_SESSION_TYPE = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    CLUTTER_BACKEND = "wayland";
+    WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
   };
 
   environment.sessionVariables = {

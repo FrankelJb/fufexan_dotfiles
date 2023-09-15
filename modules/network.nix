@@ -50,8 +50,6 @@
     # DNS resolver
     resolved.enable = true;
 
-    # inter-machine VPN
-    tailscale.enable = true;
   };
 
   # Don't wait for network startup

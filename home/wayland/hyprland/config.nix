@@ -9,7 +9,8 @@
   scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";
 in {
   wayland.windowManager.hyprland.extraConfig = ''
-    monitor=DP-3,2560x1440@244,0x0,1
+    monitor=,highrr,auto,1
+    monitor = DP-3, 2560x1440@240, 0x0, 1
     $mod = SUPER
 
     env = _JAVA_AWT_WM_NONREPARENTING,1
@@ -28,13 +29,18 @@ in {
 
     misc {
       # disable auto polling for config file changes
-      disable_autoreload = true
-
       disable_hyprland_logo = true
       disable_splash_rendering = true
 
       # disable dragging animation
       animate_mouse_windowdragging = false
+      
+      mouse_move_enables_dpms = true
+      key_press_enables_dpms=true
+
+      enable_swallow = true
+      no_direct_scanout = true #for fullscreen games
+      focus_on_activate = true
 
       # enable variable refresh rate (effective depending on hardware)
       vrr = 1
@@ -105,9 +111,6 @@ in {
       preserve_split = true
     }
 
-    # telegram media viewer
-    windowrulev2 = float, title:^(Media viewer)$
-
     # make Firefox PiP window floating and sticky
     windowrulev2 = float, title:^(Picture-in-Picture)$
     windowrulev2 = pin, title:^(Picture-in-Picture)$
@@ -116,17 +119,22 @@ in {
     windowrulev2 = workspace special silent, title:^(Firefox — Sharing Indicator)$
     windowrulev2 = workspace special silent, title:^(.*is sharing (your screen|a window)\.)$
 
-    # start spotify tiled in ws9
-    windowrulev2 = tile, title:^(Spotify)$
-    windowrulev2 = workspace 9 silent, title:^(Spotify)$
-
-    # start Discord/WebCord in ws2
-    windowrulev2 = workspace 2, title:^(.*(Disc|WebC)ord.*)$
-
     # idle inhibit while watching videos
     windowrulev2 = idleinhibit focus, class:^(mpv|.+exe)$
-    windowrulev2 = idleinhibit focus, class:^(firefox)$, title:^(.*YouTube.*)$
+    windowrulev2 = idleinhibit always, class:^(firefox)$, title:^(.*YouTube.*|.*Twitch.*)$
     windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
+
+    # start VSCodium and Signal on ws2
+    windowrulev2 = workspace 2 silent, class:^(VSCodium)$
+    windowrulev2 = workspace 2 silent, class:^(Signal)$
+    # virt-manager on ws3
+    windowrulev2 = workspace 3 silent, class:^(virt-manager)$
+
+    # Steam rules
+    windowrulev2 = workspace 5 silent, class:^(steam)$
+    windowrulev2 = workspace 5 silent, class:^(steam.*)$
+    windowrulev2 = fullscreen, class:^(steam)$,title:^(Steam Big Picture Mode)
+    windowrulev2 = idleinhibit fullscreen, class:^(steam.*)
 
     windowrulev2 = dimaround, class:^(gcr-prompter)$
 
@@ -144,7 +152,6 @@ in {
     # mouse movements
     bindm = $mod, mouse:272, movewindow
     bindm = $mod, mouse:273, resizewindow
-    bindm = $mod ALT, mouse:272, resizewindow
 
     # compositor commands
     bind = $mod SHIFT, E, exec, pkill Hyprland
