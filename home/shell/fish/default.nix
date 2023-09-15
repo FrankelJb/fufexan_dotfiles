@@ -16,7 +16,7 @@
     };
     recursive = true;
   };
-
+  
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -30,9 +30,9 @@
       ka = "kubectl apply -f";
       kd = "kubectl delete -f";
       less = "bat";
-      l = "exa";
-      ls = "exa";
-      lll = "exa -la";
+      l = "eza";
+      ls = "eza";
+      lll = "eza -la";
       pip = "pip3";
       sshk = "kitty +kitten ssh";
       vim = "nvim";
@@ -56,10 +56,6 @@
       {
         name = "forgit";
         inherit (pkgs.fishPlugins.forgit) src;
-      }
-      {
-        name = "wakatime";
-        inherit (pkgs.fishPlugins.wakatime-fish) src;
       }
     ];
   };

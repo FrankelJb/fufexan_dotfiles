@@ -6,10 +6,13 @@
     unrar
 
     # utils
-    file
+    bottom
     du-dust
     duf
+    eza
     fd
+    file
+    neofetch
     ripgrep
     zellij
 

@@ -38,6 +38,13 @@
       fsType = "vfat";
     };
 
+  fileSystems."/data/nvme1" =
+    { device = "/dev/disk/by-uuid/7311782f-8aca-4974-94ea-5d5cf0a742f3";
+      fsType = "btrfs";
+      options = [ "rw" "nosuid" "nodev" "ssd" "space_cache=v2" "subvolid=5" "subvol=/" "relatime" "compress=zstd" ];
+    };
+
+  # /dev/mapper/nvme1 on /data/nvme1 type btrfs (rw,nosuid,nodev,relatime,ssd,space_cache=v2,subvolid=5,subvol=/,x-gvfs-show)
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
