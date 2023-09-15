@@ -223,6 +223,8 @@ in {
     bind = $mod SHIFT ALT, R, exec, grimblast --notify --cursor copysave screen
 
     # workspaces
+    bind = $mod, TAB, workspace, m+1
+    bind = $mod SHIFT, TAB, workspace, m-1
     # binds mod + [shift +] {1..10} to [move to] ws {1..10}
     ${builtins.concatStringsSep "\n" (builtins.genList (
         x: let

@@ -20,17 +20,36 @@
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      enableNvidiaPatches = true; #TODO enable this
       xwayland.enable = true;
     };
-    steam.enable = true;
+    
+    steam = {
+      enable = true;
+      # fix gamescope inside steam
+      package = pkgs.steam.override {
+        extraPkgs = pkgs:
+          with pkgs; [
+            keyutils
+            libkrb5
+            libpng
+            libpulseaudio
+            libvorbis
+            stdenv.cc.cc.lib
+            xorg.libXcursor
+            xorg.libXi
+            xorg.libXinerama
+            xorg.libXScrnSaver
+          ];
+        # set correct scaling
+        extraProfile = "export GDK_SCALE=2";
+      };
+    };
   };
 
   services = {
-    openssh.enable = true;
     xserver = {
       enable = true;
-      desktopManager.gnome.enable = true;
+      # desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
       videoDrivers = ["nvidia"]; #TODO uncomment this 
     };

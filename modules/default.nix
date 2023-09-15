@@ -26,7 +26,7 @@ in {
           inputs.nh.nixosModules.default
           module_args
           ./core.nix
-          # ./network.nix
+          ./network.nix
           ./nix.nix
           # ./pam.nix
           ./security.nix
@@ -42,7 +42,7 @@ in {
     gamemode = import ./gamemode.nix;
     # greetd = import ./greetd.nix;
     minimal = import ./minimal.nix;
-    # network = import ./network.nix;
+    network = import ./network.nix;
     nix = import ./nix.nix;
   };
 }

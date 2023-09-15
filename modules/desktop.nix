@@ -57,7 +57,7 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
-  environment.systemPackages = with pkgs; [ virt-manager ];
+  environment.systemPackages = with pkgs; [ dolphin virt-manager ];
 
   hardware = {
     nvidia = { # TODO uncomment
@@ -106,6 +106,11 @@
   };
 
   services = {
+    dbus = {
+      enable = true;
+      packages = with pkgs; [dconf gcr udisks2];
+    };
+
     # provide location
     geoclue2.enable = true;
 
@@ -134,9 +139,6 @@
       resyncTimer = "10m";
     };
 
-    # needed for GNOME services outside of GNOME Desktop
-    dbus.packages = [ pkgs.gcr ];
-
     udev = {
       packages = with pkgs; [ gnome.gnome-settings-daemon ];
       extraRules = ''
@@ -156,9 +158,9 @@
 
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
-    # extraPortals = [
-    #   pkgs.xdg-desktop-portal-gtk
-    # ];
+    wlr.enable = false;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 }

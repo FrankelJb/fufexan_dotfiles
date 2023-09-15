@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{pkgs, config, lib, ...}: let
   suspendScript = pkgs.writeShellScript "suspend-script" ''
     ${pkgs.pipewire}/bin/pw-cli i all | ${pkgs.ripgrep}/bin/rg running
     # only suspend if audio isn't running
@@ -22,9 +22,17 @@ in {
     ];
     timeouts = [
       {
-        timeout = 330;
-        command = suspendScript.outPath;
+        timeout = 300;
+        command = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms off";
+        resumeCommand = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on";
       }
+      # suspend doesnt work properly on my machine
+      # {
+      #   timeout = 310;
+      #   command = suspendScript.outPath;
+      # }
     ];
   };
+
+  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
 }

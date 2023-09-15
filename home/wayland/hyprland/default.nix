@@ -16,5 +16,11 @@
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
 
   # enable hyprland
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.default.override {
+      enableNvidiaPatches = true;
+    };
+    systemdIntegration = true;
+  };
 }
