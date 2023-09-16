@@ -1,9 +1,9 @@
-{
-  inputs,
-  withSystem,
-  module_args,
-  ...
-}: let
+{ inputs
+, withSystem
+, module_args
+, ...
+}:
+let
   sharedModules = [
     ../.
     ../shell
@@ -14,19 +14,20 @@
   ];
 
   homeImports = {
-    "beans@helium" = [./helium] ++ sharedModules;
-    server = [./server] ++ sharedModules;
+    "beans@helium" = [ ./helium ] ++ sharedModules;
+    server = [ ./server ] ++ sharedModules;
   };
 
   inherit (inputs.hm.lib) homeManagerConfiguration;
-in {
+in
+{
   imports = [
     # we need to pass this to NixOS' HM module
-    {_module.args = {inherit homeImports;};}
+    { _module.args = { inherit homeImports; }; }
   ];
 
   flake = {
-    homeConfigurations = withSystem "x86_64-linux" ({pkgs, ...}: {
+    homeConfigurations = withSystem "x86_64-linux" ({ pkgs, ... }: {
       "beans@helium" = homeManagerConfiguration {
         modules = homeImports."beans@helium";
         inherit pkgs;

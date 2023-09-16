@@ -1,13 +1,26 @@
-{ pkgs
-, lib
-, self
-, inputs
-, config
-, ...
-}: {
+{
+  pkgs,
+  lib,
+  self,
+  inputs,
+  config,
+  ...
+}: let
+  suspend-hyprland = pkgs.writeShellScriptBin "suspend-hyprland" ''
+    #!/bin/bash
+    case "$1" in
+        suspend)
+            killall -STOP Hyprland
+            ;;
+        resume)
+            killall -CONT Hyprland
+            ;;
+    esac
+  '';
+in {
   boot.plymouth = {
     enable = true;
-    themePackages = [ self.packages.${pkgs.system}.catppuccin-plymouth ];
+    themePackages = [self.packages.${pkgs.system}.catppuccin-plymouth];
     theme = "catppuccin-mocha";
   };
 
@@ -24,7 +37,7 @@
       roboto
 
       # nerdfonts
-      (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+      (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
     ];
 
     # causes more issues than it solves
@@ -34,10 +47,10 @@
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = {
-      serif = [ "Roboto Serif" "Noto Color Emoji" ];
-      sansSerif = [ "Roboto" "Noto Color Emoji" ];
-      monospace = [ "JetBrainsMono Nerd Font" "Noto Color Emoji" ];
-      emoji = [ "Noto Color Emoji" ];
+      serif = ["Roboto Serif" "Noto Color Emoji"];
+      sansSerif = ["Roboto" "Noto Color Emoji"];
+      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -70,10 +83,22 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
 
-  environment.systemPackages = with pkgs; [ dolphin virt-manager ];
+  environment.systemPackages = with pkgs; [
+    # shell scripts
+    suspend-hyprland
+
+    # packages
+    cargo
+    rustc
+    dolphin
+    nodejs_20
+    virt-manager
+    vscodium
+  ];
 
   hardware = {
-    nvidia = { # TODO uncomment
+    nvidia = {
+      # TODO uncomment
       modesetting.enable = true;
       nvidiaSettings = true;
       open = true;
@@ -83,7 +108,7 @@
     opengl = {
       enable = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+      extraPackages = with pkgs; [nvidia-vaapi-driver];
     };
 
     opentabletdriver.enable = true;
@@ -153,11 +178,43 @@
     };
 
     udev = {
-      packages = with pkgs; [ gnome.gnome-settings-daemon ];
+      packages = with pkgs; [gnome.gnome-settings-daemon];
       extraRules = ''
         # add my android device to adbusers
         SUBSYSTEM=="usb", ATTR{idVendor}=="22d9", MODE="0666", GROUP="adbusers"
       '';
+    };
+  };
+
+  systemd = {
+    services.hyprland-resume = {
+      description = "Resume hyprland";
+      wantedBy = ["systemd-suspend.service" "systemd-hibernate.service"];
+      after = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+        "nvidia-suspend.service"
+      ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${suspend-hyprland} resume";
+      };
+    };
+    services.hyprland-suspend = {
+      description = "Suspend hyprland";
+      wantedBy = ["systemd-suspend.service" "systemd-hibernate.service"];
+      before = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+        "nvidia-suspend.service"
+        "nvidia-hibernate.service"
+      ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${suspend-hyprland} suspend";
+      };
     };
   };
 
