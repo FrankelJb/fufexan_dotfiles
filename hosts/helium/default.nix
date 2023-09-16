@@ -1,11 +1,12 @@
-{ config
-, pkgs
-, self
-, lib
-, inputs
-, ...
+{
+  config,
+  pkgs,
+  self,
+  lib,
+  inputs,
+  ...
 }: {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [./hardware-configuration.nix];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -26,7 +27,7 @@
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       xwayland.enable = true;
     };
-    
+
     steam = {
       enable = true;
       # fix gamescope inside steam
@@ -48,6 +49,13 @@
         extraProfile = "export GDK_SCALE=2";
       };
     };
+
+    ssh = {
+      extraConfig = ''
+        Host gitea.carbon.habanerojam.xyz
+          IdentityFile ~/.ssh/gitkey_ed25519
+      '';
+    };
   };
 
   services = {
@@ -56,7 +64,7 @@
       enable = true;
       # desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
-      videoDrivers = ["nvidia"]; #TODO uncomment this 
+      videoDrivers = ["nvidia"]; #TODO uncomment this
     };
   };
 }

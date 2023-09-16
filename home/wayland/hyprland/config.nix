@@ -20,9 +20,12 @@ in {
     # set cursor for HL itself
     exec-once = hyprctl setcursor ${pointer.name} ${toString pointer.size}
 
-    exec-once = systemctl --user start clight
     exec-once = eww open bar
     exec-once = eww open osd
+
+    exec-once = [workspace 1 silent] firefox
+    exec-once = [silent] signal-desktop --ozone-platform-hint=auto
+    exec-once = [silent] virt-manager
 
     # use this instead of hidpi patches
     xwayland {
@@ -188,6 +191,12 @@ in {
     bind = $mod, K, movefocus, u
     bind = $mod, L, movefocus, r
 
+    # Move (vim style)
+    bind = $mod CTRL, H, movewindow, l
+    bind = $mod CTRL, L, movewindow, r
+    bind = $mod CTRL, K, movewindow, u
+    bind = $mod CTRL, J, movewindow, d
+
     # window resize
     bind = $mod, S, submap, resize
 
@@ -249,8 +258,8 @@ in {
       10)}
 
     # special workspace
-    bind = $mod SHIFT, grave, movetoworkspace, special
-    bind = $mod, grave, togglespecialworkspace, eDP-1
+    bind = $mod, S , movetoworkspace, special
+    bind = $mod, N , togglespecialworkspace,
 
     # cycle workspaces
     bind = $mod, bracketleft, workspace, m-1

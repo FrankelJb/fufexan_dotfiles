@@ -14,6 +14,7 @@
     file
     neofetch
     ripgrep
+    tealdeer
     zellij
 
     # file managers
