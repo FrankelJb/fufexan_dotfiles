@@ -10,7 +10,7 @@ let
     module_args
     inputs.anyrun.homeManagerModules.default
     inputs.nix-index-db.hmModules.nix-index
-    inputs.hyprland.homeManagerModules.default
+    # inputs.hyprland.homeManagerModules.default
   ];
 
   homeImports = {

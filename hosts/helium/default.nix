@@ -1,10 +1,9 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ pkgs
+, lib
+, inputs
+, ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [ ./hardware-configuration.nix ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -19,11 +18,14 @@
   networking.hostName = "helium";
 
   programs = {
-    # enable hyprland and required options
+    # # enable hyprland and required options
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      xwayland.enable = true;
+
+      xwayland = {
+        enable = true;
+      };
+      nvidiaPatches = true;
     };
 
     steam = {
@@ -62,7 +64,7 @@
       enable = true;
       # desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
-      videoDrivers = ["nvidia"]; #TODO uncomment this
+      videoDrivers = [ "nvidia" ]; #TODO uncomment this
     };
   };
 }
