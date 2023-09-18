@@ -124,6 +124,8 @@ in
         "[workspace 1 silent] firefox"
         "[silent] signal-desktop --ozone-platform-hint=auto"
         "[silent] virt-manager"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
       ];
       input = {
         kb_layout = "us";

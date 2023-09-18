@@ -1,8 +1,7 @@
-{
-  pkgs,
-  inputs,
-  osConfig,
-  ...
+{ pkgs
+, inputs
+, osConfig
+, ...
 }: {
   programs.anyrun = {
     enable = true;
@@ -10,9 +9,11 @@
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
+        kidex
         randr
         rink
         shell
+        stdin
         symbols
         translate
         inputs.anyrun-nixos-options.packages.${pkgs.system}.default

@@ -93,7 +93,7 @@ in {
     dolphin
     nodejs_20
     virt-manager
-    vscodium
+    vscode
   ];
 
   hardware = {

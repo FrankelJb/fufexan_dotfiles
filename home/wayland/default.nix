@@ -45,6 +45,7 @@ in
     swaybg
 
     # utils
+    cliphist
     ocrScript
     wf-recorder
     wl-clipboard
