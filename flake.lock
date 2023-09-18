@@ -263,11 +263,8 @@
       "locked": {
         "lastModified": 1693997747,
         "narHash": "sha256-W23nMGmDnyBgxO8O/9jcZtiSpa0taMNcRAD1das/ttw=",
-        "lastModified": 1693997747,
-        "narHash": "sha256-W23nMGmDnyBgxO8O/9jcZtiSpa0taMNcRAD1das/ttw=",
         "owner": "hyprwm",
         "repo": "contrib",
-        "rev": "5b67181fced4fb06d26afcf9614b35765c576168",
         "rev": "5b67181fced4fb06d26afcf9614b35765c576168",
         "type": "github"
       },
