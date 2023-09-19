@@ -84,6 +84,11 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
+    # nvidia
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-tools
+
     # shell scripts
     suspend-hyprland
 
@@ -98,7 +103,6 @@ in {
 
   hardware = {
     nvidia = {
-      # TODO uncomment
       modesetting.enable = true;
       nvidiaSettings = true;
       open = true;

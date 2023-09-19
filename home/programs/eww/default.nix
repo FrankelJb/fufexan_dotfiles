@@ -1,20 +1,19 @@
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  ...
-}: let
+{ options
+, config
+, lib
+, pkgs
+, inputs
+, ...
+}:
+let
   dependencies = with pkgs; [
     cfg.package
 
     inputs.gross.packages.${pkgs.system}.gross
     config.wayland.windowManager.hyprland.package
-
     bash
     blueberry
     bluez
-    brillo
     coreutils
     dbus
     findutils
@@ -22,9 +21,11 @@
     gnome.gnome-control-center
     gnused
     imagemagick
+    gojq
     jaq
     jc
     libnotify
+    light
     networkmanager
     pavucontrol
     playerctl
@@ -51,10 +52,10 @@
   '';
 
   cfg = config.programs.eww-hyprland;
-in {
+in
+{
   options.programs.eww-hyprland = {
     enable = lib.mkEnableOption "eww Hyprland config";
-
     package = lib.mkOption {
       type = with lib.types; nullOr package;
       default = pkgs.eww-wayland;
@@ -74,7 +75,8 @@ in {
       default = null;
       defaultText = lib.literalExpression "null";
       description = ''
-        SCSS file with colors defined in the same way as Catppuccin colors are,
+          SCSS
+          file with colors defined in the same way as Catppuccin colors are,
         to be used by eww.
 
         Defaults to Catppuccin Mocha.
@@ -83,15 +85,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [cfg.package];
+    home.packages = [ cfg.package ];
 
     # remove nix files
     xdg.configFile."eww" = {
       source = lib.cleanSourceWith {
-        filter = name: _type: let
-          baseName = baseNameOf (toString name);
-        in
-          !(lib.hasSuffix ".nix" baseName) && (baseName != "colors.scss");
+        filter = name: _type:
+          let
+            baseName = baseNameOf (toString name);
+          in
+            !(lib.hasSuffix ".nix" baseName);
         src = lib.cleanSource ./.;
       };
 
@@ -108,21 +111,21 @@ in {
     xdg.configFile."eww/css/colors.scss".text =
       if cfg.colors != null
       then cfg.colors
-      else (builtins.readFile ./css/colors.scss);
+      else (builtins.readFile ./css/_colors.scss);
 
     systemd.user.services.eww = {
       Unit = {
         Description = "Eww Daemon";
         # not yet implemented
         # PartOf = ["tray.target"];
-        PartOf = ["graphical-session.target"];
+        PartOf = [ "graphical-session.target" ];
       };
       Service = {
         Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
         ExecStart = "${cfg.package}/bin/eww daemon --no-daemonize";
         Restart = "on-failure";
       };
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }

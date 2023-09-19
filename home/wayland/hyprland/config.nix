@@ -6,7 +6,7 @@
 let
   c = theme.colors.colors_android.${theme.variant};
   pointer = config.home.pointerCursor;
-  scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";
+  # scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";
 in
 {
   wayland.windowManager.hyprland = {
