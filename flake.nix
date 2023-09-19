@@ -84,12 +84,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    kmonad = {
-      url = "github:kmonad/kmonad?dir=nix";
+    matugen = {
+      url = "github:InioX/matugen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    lanzaboote.url = "github:nix-community/lanzaboote";
 
     nh = {
       url = "github:viperML/nh";
@@ -112,6 +110,5 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "fu";
     };
-
   };
 }
