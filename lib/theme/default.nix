@@ -10,8 +10,8 @@ lib: {
   };
 
   wallpaper = let
-    url = "https://images.unsplash.com/photo-1690460550070-e73402127f11?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=marlon-medau-TFg35jn95OU-unsplash.jpg";
-    sha256 = "18cyaxq4bw6qd79yvjgq4nsxspy0jwq88dy00z92whm5d13ckvgm";
+    url = "https://www.nasa.gov/sites/default/files/thumbnails/image/stsci-01h44ay5ztcv1npb227b2p650j.png";
+    sha256 = "158iyidmz2pvcp0yinq4yzhny3wmrc2isrs39ilh5r345dkinzj1";
     ext = lib.last (lib.splitString "." url);
   in
     builtins.fetchurl {

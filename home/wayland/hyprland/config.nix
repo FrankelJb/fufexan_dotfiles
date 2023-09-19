@@ -1,11 +1,10 @@
-{
-  config,
-  default,
-  theme,
-  ...
-}: let
+{ config
+, default
+, theme
+, ...
+}:
+let
   c = theme.colors.colors_android.${theme.variant};
-
   pointer = config.home.pointerCursor;
   scriptDir = "${config.home.homeDirectory}/.config/eww/scripts";
 in
@@ -120,12 +119,10 @@ in
       exec-once = [
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
         "eww open bar"
-        " eww open osd"
+        "eww open osd"
         "[workspace 1 silent] firefox"
         "[silent] signal-desktop --ozone-platform-hint=auto"
         "[silent] virt-manager"
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
       ];
       input = {
         kb_layout = "us";
@@ -154,75 +151,54 @@ in
         # enable variable refresh rate (effective depending on hardware)
         vrr = 1;
 
-      # groupbar
-      groupbar_titles_font_size = 16
-      groupbar_gradients = false
-    }
+        # groupbar
+        groupbar_titles_font_size = 16;
+        groupbar_gradients = false;
+      };
+      general = {
+        monitor = [
+          ",highrr,auto,1"
+          "DP-3, 2560x1440@240, 0x0, 1"
+        ];
+        gaps_in = 5;
+        gaps_out = 5;
+        border_size = 1;
+        "col.active_border" = "rgba(88888888)";
+        "col.inactive_border" = "rgba(00000088)";
 
-    # touchpad gestures
-    gestures {
-      workspace_swipe = true
-      workspace_swipe_forever = true
-    }
+        # group borders
+        "col.group_border_active" = "rgba(${c.color_accent_primary}88)";
+        "col.group_border" = "rgba(${c.color_accent_primary}88)";
+      };
 
-    input {
-      kb_layout = us
-      sensitivity = 0
-      force_no_accel = 1
+      decoration = {
+        rounding = 16;
+        blur = {
+          enabled = true;
+          size = 10;
+          passes = 3;
+          new_optimizations = true;
+          brightness = 1.0;
+          noise = 0.02;
+        };
 
-      # focus change on cursor move
-      follow_mouse = 1
-      accel_profile = flat
-    }
+        drop_shadow = true;
+        shadow_ignore_window = true;
+        shadow_offset = "0 2";
+        shadow_range = 20;
+        shadow_render_power = 3;
+        "col.shadow" = "rgba(00000055)";
+      };
 
-    general {
-      gaps_in = 5
-      gaps_out = 5
-      border_size = 1
-      "col.active_border" = "rgba(88888888)";
-      "col.inactive_border" = "rgba(00000088)";
-
-      # group borders
-      "col.group_border_active" = "rgba(${colors.pink}88)";
-      "col.group_border" = "rgba(${colors.surface0}88)";
-    }
-
-    decoration {
-      rounding = 16
-      blur {
-        enabled = true
-        size = 10
-        passes = 3
-        new_optimizations = true
-        brightness = 1.0
-        noise = 0.02
-      }
-
-      drop_shadow = true
-      shadow_ignore_window = true
-      shadow_offset = 0 2
-      shadow_range = 20
-      shadow_render_power = 3
-      col.shadow = rgba(00000055)
-    }
-
-    animations {
-      enabled = true
-      animation = border, 1, 2, default
-      animation = fade, 1, 4, default
-      animation = windows, 1, 3, default, popin 80%
-      animation = workspaces, 1, 2, default, slide
-    }
-
-    dwindle {
-      # keep floating dimentions while tiling
-      pseudotile = true
-      preserve_split = true
-    }
-
-    # make Firefox PiP window floating and sticky
-    windowrulev2 = float, title:^(Picture-in-Picture)$
-    windowrulev2 = pin, title:^(Picture-in-Picture)$
+      dwindle = {
+        # keep floating dimentions while tiling
+        pseudotile = true;
+        preserve_split = true;
+      };
+      windowrulev2 = [
+        # make Firefox PiP window floating and sticky
+        "float, title:^(Picture-in-Picture)$"
+        "pin, title:^(Picture-in-Picture)$"
 
         # throw sharing indicators away
         "workspace special silent, title:^(Firefox — Sharing Indicator)$"

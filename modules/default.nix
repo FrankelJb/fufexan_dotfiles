@@ -1,14 +1,15 @@
-{
-  self,
-  inputs,
-  default,
-  ...
-}: let
+{ self
+, inputs
+, default
+, ...
+}:
+let
   # system-agnostic args
   module_args._module.args = {
     inherit default inputs self;
   };
-in {
+in
+{
   imports = [
     {
       _module.args = {
