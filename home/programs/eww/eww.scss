@@ -1,4 +1,4 @@
-@import 'css/colors';
+@import "css/colors";
 
 @mixin rounding {
   border-radius: 16px;
@@ -15,13 +15,13 @@
   transition: 200ms ease;
 }
 
-@import 'css/calendar';
-@import 'css/music';
-@import 'css/osd';
-@import 'css/sidebar';
-@import 'css/system';
-@import 'css/volume';
-@import 'css/workspaces';
+@import "css/calendar";
+@import "css/music";
+@import "css/osd";
+@import "css/sidebar";
+@import "css/system";
+@import "css/volume";
+@import "css/workspaces";
 
 .bar {
   background-color: $bg;
@@ -56,9 +56,13 @@ tooltip {
 }
 
 .icon,
-.icon label { font-family: Material Symbols Outlined; }
+.icon label {
+  font-family: Material Symbols Outlined;
+}
 
-.module { margin: 0 5px; }
+.module {
+  margin: 0 5px;
+}
 
 .hour {
   font-weight: bold;
@@ -66,7 +70,7 @@ tooltip {
 }
 
 .minute {
-  padding-right: .7rem;
+  padding-right: 0.7rem;
 }
 
 .date {
@@ -78,8 +82,12 @@ tooltip {
   }
 }
 
-.bright-icon { color: $yellow; }
-.module-bt { font-size: 1.2rem; }
+.bright-icon {
+  color: $yellow;
+}
+.module-bt {
+  font-size: 1.2rem;
+}
 
 scale trough {
   background-color: $bg1;
@@ -89,7 +97,9 @@ scale trough {
   min-width: 70px;
 }
 
-.workspaces { margin-left: 10px; }
+.workspaces {
+  margin-left: 10px;
+}
 
 .evtButton:hover {
   background-color: $surface1;

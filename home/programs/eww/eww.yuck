@@ -1,5 +1,4 @@
 (include "./modules/bluetooth.yuck")
-(include "./modules/bright.yuck")
 (include "./modules/clock.yuck")
 (include "./modules/music.yuck")
 (include "./modules/net.yuck")
@@ -23,7 +22,6 @@
   (box
     :space-evenly false
     :halign "end"
-    (bright)
     (volume-module)
     (bluetooth)
     (net)
@@ -34,7 +32,6 @@
   (box
     :space-evenly false
     :halign "end"
-    (bright)
     (volume-module)
     (bluetooth)
     (net)
@@ -62,20 +59,3 @@
     :stacking "fg"
     :exclusive true
   (primary-bar-box))
-
-(defwidget secondary-bar-box []
-  (centerbox
-    (left)
-    (center)
-    (right-alt)))
-
-(defwindow secondary-bar
-    :monitor 1
-    :geometry (geometry :x "0%"
-      :y "1%"
-      :width "99%"
-      :height "32px"
-      :anchor "top center")
-    :stacking "fg"
-    :exclusive true
-  (secondary-bar-box))

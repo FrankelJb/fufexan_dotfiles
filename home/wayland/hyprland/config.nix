@@ -13,12 +13,23 @@ in
     settings = {
       "$mod" = "SUPER";
       "$kw" = "dwindle:no_gaps_when_only";
-      animation = {
+      animations = {
+        enabled = "yes";
+
+        # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
+        bezier = [
+          "myBezier, 0.05, 0.9, 0.1, 1.05"
+          "overshot, 0.13, 0.99, 0.29, 1.1"
+          "scurve, 0.98, 0.01, 0.02, 0.98"
+          "easein, 0.47, 0, 0.745, 0.715"
+        ];
+
         animation = [
-          "border, 1, 2, default"
-          "fade, 1, 4, default"
-          "windows, 1, 3, default, popin 80%"
-          "workspaces, 1, 2, default, slide"
+          "windowsOut, 1, 7, default, popin 10%"
+          "windows, 1, 5, overshot, popin 10%"
+          "border, 1, 10, default"
+          "fade, 1, 10, default"
+          "workspaces, 1, 6, overshot, slide"
         ];
       };
       # mouse movements
@@ -47,6 +58,8 @@ in
           "$mod, SPACE, exec, pkill.${default.launcher}-wrapped || run-as-service ${default.launcher}"
           # terminal
           "$mod, Return, exec, run-as-service ${default.terminal.name}"
+          # cliphist
+          "CTRL ALT C, exec, "
           # logout menu
           "$mod, Escape, exec, wlogout -p layer-shell"
           # lock screen
@@ -161,33 +174,34 @@ in
           "DP-3, 2560x1440@240, 0x0, 1"
         ];
         gaps_in = 5;
-        gaps_out = 5;
-        border_size = 1;
-        "col.active_border" = "rgba(88888888)";
-        "col.inactive_border" = "rgba(00000088)";
-
-        # group borders
-        "col.group_border_active" = "rgba(${c.color_accent_primary}88)";
-        "col.group_border" = "rgba(${c.color_accent_primary}88)";
+        gaps_out = 15;
+        border_size = 2;
+        "col.inactive_border" = "rgb(5e6798)";
+        "col.active_border" = "rgba(7793D1FF)";
+        layout = "dwindle";
+        no_cursor_warps = true;
       };
 
       decoration = {
-        rounding = 16;
+        rounding = 10;
+        multisample_edges = true;
+
+        active_opacity = 0.95;
+        inactive_opacity = 0.9;
+        fullscreen_opacity = 1.0;
+
         blur = {
-          enabled = true;
-          size = 10;
-          passes = 3;
-          new_optimizations = true;
-          brightness = 1.0;
-          noise = 0.02;
+          enabled = "yes";
+          size = 5;
+          passes = 4;
         };
 
         drop_shadow = true;
         shadow_ignore_window = true;
-        shadow_offset = "0 2";
         shadow_range = 20;
         shadow_render_power = 3;
-        "col.shadow" = "rgba(00000055)";
+        "col.shadow" = "0x55161925";
+        "col.shadow_inactive" = "0x22161925";
       };
 
       dwindle = {

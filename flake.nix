@@ -58,6 +58,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    anyrun-cliphist = {
+      url = "github:benoitlouy/anyrun-cliphist";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     eww = {
       url = "github:elkowar/eww";
       inputs.nixpkgs.follows = "nixpkgs";

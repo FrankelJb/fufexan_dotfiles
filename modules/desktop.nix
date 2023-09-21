@@ -98,7 +98,6 @@ in {
     dolphin
     nodejs_20
     virt-manager
-    vscode
   ];
 
   hardware = {

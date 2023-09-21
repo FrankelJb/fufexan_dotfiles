@@ -25,6 +25,7 @@ in
     ./sway.nix
     ./swaybg.nix
     ./swayidle.nix
+    ./wofi.nix
   ];
 
   programs.eww-hyprland = {

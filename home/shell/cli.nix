@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     # archives
     zip
@@ -9,7 +9,6 @@
     bottom
     du-dust
     duf
-    eza
     fd
     file
     neofetch

@@ -1,7 +1,8 @@
-{ pkgs
-, inputs
-, osConfig
-, ...
+{
+  pkgs,
+  inputs,
+  osConfig,
+  ...
 }: {
   programs.anyrun = {
     enable = true;
@@ -9,6 +10,7 @@
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
+        inputs.anyrun-cliphist.packages.${pkgs.system}.default
         kidex
         randr
         rink
