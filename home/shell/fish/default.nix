@@ -16,7 +16,7 @@
     };
     recursive = true;
   };
-  
+
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -28,7 +28,7 @@
       diff = "delta -s";
       k = "kubectl";
       ka = "kubectl apply -f";
-      kd = "kubectl delete -f";
+      kd = "kubectl delete";
       less = "bat";
       l = "eza";
       ls = "eza";

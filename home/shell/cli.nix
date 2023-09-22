@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # archives
     zip
@@ -11,6 +11,7 @@
     duf
     fd
     file
+    kubectl
     neofetch
     ripgrep
     tealdeer

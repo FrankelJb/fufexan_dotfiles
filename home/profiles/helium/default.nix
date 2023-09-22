@@ -2,7 +2,7 @@
   imports = [
     ../../editors/neovim
     ../../programs
-    ../../programs/dunst.nix
+    ../../programs/dunst
     ../../programs/games.nix
     ../../programs/vscode.nix
     ../../wayland

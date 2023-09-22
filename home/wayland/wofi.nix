@@ -15,12 +15,12 @@
       normal_window = true;
       layer = "overlay";
       term = "foot";
-      columns = 2;
+      columns = 5;
 
       ## Geometry
-      width = "30%";
-      height = "30%";
-      location = "top_left";
+      width = "60%";
+      height = "40%";
+      location = "bottom_left";
       orientation = "vertical";
       halign = "fill";
       line_wrap = "off";
@@ -28,7 +28,7 @@
 
       ## Images
       allow_markup = true;
-      allo_images = true;
+      allow_images = true;
       image_size = 24;
 
       ## Search

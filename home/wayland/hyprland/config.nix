@@ -59,7 +59,7 @@ in
           # terminal
           "$mod, Return, exec, run-as-service ${default.terminal.name}"
           # cliphist
-          "CTRL ALT C, exec, "
+          "CTRL ALT, C, exec, "
           # logout menu
           "$mod, Escape, exec, wlogout -p layer-shell"
           # lock screen
@@ -123,6 +123,12 @@ in
           10));
 
       # media controls
+      binde = [
+        # volume controls
+        ",XF86AudioRaiseVolume, exec, volume -i 5"
+        ",XF86AudioLowerVolume, exec, volume -d 5"
+        ",XF86AudioMute, exec, volume -t"
+      ];
       bindl = [
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
@@ -133,6 +139,8 @@ in
         "hyprctl setcursor ${pointer.name} ${toString pointer.size}"
         "eww open bar"
         "eww open osd"
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
         "[workspace 1 silent] firefox"
         "[silent] signal-desktop --ozone-platform-hint=auto"
         "[silent] virt-manager"

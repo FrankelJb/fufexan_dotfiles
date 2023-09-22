@@ -19,6 +19,7 @@ in
 {
   imports = [
     ../programs/eww
+    ../programs/rofi
     ./anyrun.nix
     ./gtklock.nix
     ./hyprland
