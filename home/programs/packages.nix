@@ -5,6 +5,7 @@
 
     # misc
     libnotify
+    qmk
     xdg-utils
   ];
 }

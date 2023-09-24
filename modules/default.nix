@@ -1,14 +1,15 @@
-{
-  self,
-  inputs,
-  default,
-  ...
-}: let
+{ self
+, inputs
+, default
+, ...
+}:
+let
   # system-agnostic args
   module_args._module.args = {
     inherit default inputs self;
   };
-in {
+in
+{
   imports = [
     {
       _module.args = {
@@ -17,26 +18,27 @@ in {
 
         # NixOS modules
         sharedModules = [
-          ({
-            pkgs,
-            self,
-            ...
-          }: let
-            theme = import "${self}/lib/theme/theme.nix" self pkgs;
-          in {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.beans._module.args = {inherit theme;};
-            };
-            _module.args = {inherit theme;};
-          })
+          ({ pkgs
+           , self
+           , ...
+           }:
+            let
+              theme = import "${self}/lib/theme/theme.nix" self pkgs;
+            in
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.beans._module.args = { inherit theme; };
+              };
+              _module.args = { inherit theme; };
+            })
 
           # {disabledModules = ["security/pam.nix"];}
           inputs.agenix.nixosModules.default
           inputs.hm.nixosModule
           inputs.hyprland.nixosModules.default
-          inputs.nix-gaming.nixosModules.default
+          inputs.nix-gaming.nixosModules.pipewireLowLatency
           inputs.nh.nixosModules.default
           module_args
           ./core.nix

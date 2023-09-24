@@ -6,14 +6,20 @@
     unrar
 
     # utils
+    age
+    ansible
     bottom
     du-dust
     duf
     fd
     file
     kubectl
+    ncdu
     neofetch
+    restic
     ripgrep
+    rust-bin.stable.latest.default
+    sops
     tealdeer
     zellij
 
